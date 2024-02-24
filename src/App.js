@@ -6,7 +6,12 @@ import BackCover from './components/BackCover'
 function App() {
     const active = useRef();
     const blur = useRef();
+    const checkboxRef = useRef(null);
     const togglePopup = () => {
+      const checkbox = checkboxRef.current;
+      if (checkbox.checked) {
+        checkbox.checked = false;
+      }
     active.current.classList.toggle("active");
     blur.current.classList.toggle("active");
   };
@@ -20,7 +25,7 @@ function App() {
       </div>
     </div>
        <div className="bookCase" ref={active}>
-        <input type="checkbox" name="" className="input" id="checkbox-page1" />
+        <input type="checkbox" name="" ref={checkboxRef} className="input" id="checkbox-page1" />
         <div className="book">
           <div className="page" id="page1">
             <FrontCover />
