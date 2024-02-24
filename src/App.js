@@ -1,24 +1,35 @@
-import logo from './logo.svg';
+import { useRef } from "react"; 
 import './App.css';
-
+import FrontCover from './components/FrontCover'
+import BackPage from './components/BackPage'
+import BackCover from './components/BackCover'
 function App() {
+    const active = useRef();
+    const blur = useRef();
+    const togglePopup = () => {
+    active.current.classList.toggle("active");
+    blur.current.classList.toggle("active");
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <>
+   <div className="bg-[#eee] min-h-screen flex justify-center items-center w-full" ref={blur}>
+     <div>
+        <button onClick={togglePopup} className="px-4 py-2 text-2xl font-semibold outline-none border-2 cursor-pointer">
+          +
+        </button>
+      </div>
     </div>
+       <div className="bookCase" ref={active}>
+        <input type="checkbox" name="" className="input" id="checkbox-page1" />
+        <div className="book">
+          <div className="page" id="page1">
+            <FrontCover />
+            <BackPage />
+          </div>
+          <BackCover togglePopup={togglePopup}/>
+        </div>
+      </div>
+    </>
   );
 }
 
